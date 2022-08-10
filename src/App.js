@@ -15,6 +15,7 @@ import Packages from "./containers/app/packages"
 import PageNotFound from "./containers/app/error"
 
 import Navbar from './components/Navbar';
+import { Footer } from './components/Footer';
 
 function App() {
   return (
@@ -34,6 +35,7 @@ function App() {
         <Route path='/user' element={<User/>}></Route>
         <Route path='/admin' element={<Admin/>}></Route>
       </Routes>
+      <Footer/>
      </BrowserRouter>
     </div>
   );

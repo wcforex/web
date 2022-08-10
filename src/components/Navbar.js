@@ -14,7 +14,7 @@ export default function Navbar() {
                                     <div className="h-4 w-4 rounded-full bg-gray-900"></div>
                                     <div className="h-6 w-2 bg-sky-500"></div>
                                 </div>
-                                <span className="text-base font-bold text-gray-400">SASS</span>
+                                <span className="text-base font-bold text-gray-400">COMPANY</span>
                             </a>
                             <label for="hbr" className="peer-checked:hamburger block relative z-20 p-6 -mr-6 cursor-pointer lg:hidden">
                                 <div aria-hidden="true" className="m-auto h-0.5 w-6 rounded bg-sky-900 transition duration-300"></div>
