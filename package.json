@@ -1,6 +1,7 @@
 {
-  "name": "ui",
+  "name": "WCFI",
   "version": "0.1.0",
+  "description": "We are a finacial trading firm that helps individuals to gain daily interest on their investments through professional trading.",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.6.6",
@@ -25,6 +26,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "prod": "serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
