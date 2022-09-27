@@ -26,7 +26,7 @@ const Withdrawal = () => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    });
 
     const [amount, setAmount] = useState(0)
     const [address, setAddress] = useState(null)
