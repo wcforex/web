@@ -22,6 +22,7 @@ export default function User() {
     if (value === 'withdrawal') {
       navigate('/user/withdrawal');
     }
+    // eslint-disable-next-line
   }, [value])
 
   return (
