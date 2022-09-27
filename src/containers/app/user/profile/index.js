@@ -103,7 +103,7 @@ function Profile() {
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Dogecoin Address</label>
-                                        <input disabled type="text" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:lg:text-sm text-xs text-xs font-medium leading-none text-gray-800" aria-labelledby="dogecoinAddress" placeholder="Enter your dogecoin address" />
+                                        <input disabled type="text" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="dogecoinAddress" placeholder="Enter your dogecoin address" />
                                     </div>
                                 </div>
                             </div>
