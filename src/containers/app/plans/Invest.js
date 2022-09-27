@@ -10,7 +10,6 @@ function classNames(...classes) {
 const Invest = () => {
     const location = useLocation()
     const item = location.state
-    // console.log(item.item)
     const navigate = useNavigate()
 
     const [packages, setPackages] = useState(null)
@@ -21,7 +20,6 @@ const Invest = () => {
         const res = await fetch('https://wcforex.cyclic.app/api/v1/package/all').then((response) => Promise.resolve(response)).catch((err) => Promise.reject(new Error(`${err}`)))
         Promise.all([res.json()]).then((value) => {
             setPackages(value[0].packages)
-            // console.log(value[0].packages)
             setLoading('done')
         })
     }
@@ -30,7 +28,7 @@ const Invest = () => {
         fetchData()
     }, [])
 
-    const [invest, setInvest] = useState()
+    // const [invest, setInvest] = useState()
     const [selected, setSelected] = useState(item.item)
     const [amount, setAmount] = useState(0)
     const [alert, setAlert] = useState(false)

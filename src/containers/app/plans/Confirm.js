@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { PaperClipIcon } from '@heroicons/react/20/solid'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
 export default function Confirm() {
     const location = useLocation()
     const item = location.state
-    console.log(item)
 
     const [dailyReturns, setDailyReturns] = useState(0)
     const [totalReturn, setTotalReturn] = useState(0)

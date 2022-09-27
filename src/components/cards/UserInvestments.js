@@ -1,8 +1,8 @@
 import React from 'react';
-import { useUserState } from '../../containers/state/store'
+// import { useUserState } from '../../containers/state/store'
 
 const UserInvestments = () => {
-    const user = useUserState((state) => state.user)
+    // const user = useUserState((state) => state.user)
     return (
         <>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-md">

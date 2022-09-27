@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import instance from '../../../services/provider'
 import { useUserState } from '../../../state/store';
 
@@ -17,7 +17,6 @@ const Withdrawal = () => {
         setLoading('begin')
         try {
             const { data } = await instance.get('/payment-method/all')
-            // console.log(data.paymentMethods)
             setPaymentMethods(data.paymentMethods)
             setLoading('done')
         } catch (error) {
@@ -36,9 +35,8 @@ const Withdrawal = () => {
         visible: '',
         message: ''
     })
-    const [loader, setLoader] = useState(false)
+    // const [loader, setLoader] = useState(false)
     const user = useUserState((state) => state.user)
-    const navigate = useNavigate()
 
     const onConfirm = async (e) => {
         e.preventDefault()
@@ -57,7 +55,7 @@ const Withdrawal = () => {
                         if (address === null || address === '') {
                             setAlert({ visible: 'address', message: `Address mast not be empty!` })
                         } else {
-                            setLoader(true)
+                            // setLoader(true)
                             const payload = {
                                 userId: user._id,
                                 userName: user.firstName + ' ' + user.lastName,
@@ -74,7 +72,7 @@ const Withdrawal = () => {
                                 // }
 
                             } catch (error) {
-                                setLoader(false)
+                                // setLoader(false)
                                 console.log(error)
                             }
                         }

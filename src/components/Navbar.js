@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom'
 import Dropdown from './Dropdown'
 import { useUserState } from '../containers/state/store';
@@ -6,7 +6,6 @@ import { useUserState } from '../containers/state/store';
 export default function Navbar() {
     const user = useUserState((state) => state.user)
     const isLoggedIn = useUserState((state) => state.isLoggedIn)
-    // console.log(user)
     return (
         <div>
             <header>

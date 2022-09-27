@@ -2,15 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 
 export default function User() {
-  const [show, setShow] = useState(false);
   const [value, setValue] = useState('');
-  const [deliverables, setDeliverables] = useState(false);
-  const [profile, setProfile] = useState(false);
 
   const navigate = useNavigate();
 
   const onChange = (e) => {
-    // console.log(e.target.value)
     setValue(e.target.value);
   }
   useEffect(() => {

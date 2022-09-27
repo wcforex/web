@@ -3,6 +3,7 @@ import { useUserState } from "../../../state/store";
 
 function Profile() {
     const user = useUserState((state) => state.user)
+
     const [userData, setUserData] = useState({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -11,11 +12,15 @@ function Profile() {
         password: user.password,
     })
 
+    const onSubmit = () => {
+        setUserData()
+    }
+
     return (
         <>
             <div className="flex items-center justify-center pt-24" >
                 <div className=" w-full px-8">
-                    <form className="xl:px-24">
+                    <form className="xl:px-24" onSubmit={onSubmit}>
                         <div className="px-5 py-4 bg-gray-100 rounded-lg flex items-center justify-between mt-7">
                             <div className="flex items-center">
                                 <div className="flex-shrink-0">
@@ -103,7 +108,7 @@ function Profile() {
                                 </div>
                             </div>
                         </div>
-                        <button role="button" type="submit" aria-label="Submit" className="flex items-center mx-auto my-0 justify-center py-2 px-16 focus:outline-none bg-sky-700 rounded md:mt-4">
+                        <button type="submit" aria-label="Submit" className="flex items-center mx-auto my-0 justify-center py-2 px-16 focus:outline-none bg-sky-700 rounded md:mt-4">
                             <span className="lg:text-sm text-xs font-medium text-center text-sky-50 capitalize">Save</span>
                         </button>
                     </form>
