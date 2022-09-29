@@ -33,7 +33,11 @@ export default function Signin() {
         setRefreshToken(data.refreshToken)
         setUser(data.user)
         setLoading(false)
-        navigate('/account')
+        if (data.user.role === 'admin') {
+          navigate('/admin/all-orders')
+        } else {
+          navigate('/account')
+        }
       }
     } catch (error) {
       setLoading(false)

@@ -7,8 +7,11 @@ const userState = persist(
         isLoggedIn: false,
         token: null,
         refreshToken: null,
+        invested: null,
+        profit: null,
+        deposit: null,
         setUser: (user) => {
-            // console.log({ user });
+            console.log({ user });
             set(() => ({ user, isLoggedIn: true }));
         },
         setToken: (token) => {
@@ -19,7 +22,19 @@ const userState = persist(
             // console.log({refreshToken})
             set(() => ({ refreshToken }));
         },
-        logOut: () => set({ user: null, token: null, refreshToken: null, isLoggedIn: false }),
+        setInvested: (invested) => {
+            // console.log({invested})
+            set(() => ({ invested }));
+        },
+        setProfit: (profit) => {
+            // console.log({profit})
+            set(() => ({ profit }));
+        },
+        setDeposit: (deposit) => {
+            // console.log({deposit})
+            set(() => ({ deposit }));
+        },
+        logOut: () => set({ user: null, token: null, refreshToken: null, isLoggedIn: false, invested: null, profit: null }),
     }),
     { name: "user-setting" }
 );

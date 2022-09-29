@@ -26,8 +26,20 @@ import { Footer } from './components/Footer';
 
 //protected routes
 import UserRoutes from './routes/UserRoutes';
+import AdminRoutes from './routes/AdminRoutes';
 import Invest from './containers/app/plans/Invest';
 import { AxiosInterceptor } from './containers/services/provider';
+
+//admin
+import AllOrders from './containers/app/admin/orders'
+import EditOrder from './containers/app/admin/orders/Edit';
+import AllUsers from './containers/app/admin/users';
+import EditUser from './containers/app/admin/users/Edit';
+import AllWithdrawals from './containers/app/admin/withdrawal';
+import EditWithdrawal from './containers/app/admin/withdrawal/Edit';
+import AllPackages from './containers/app/admin/packages';
+import NewPackage from './containers/app/admin/packages/New';
+import EditPackage from './containers/app/admin/packages/Edit';
 
 function App() {
   return (
@@ -44,7 +56,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
-          
+
           <Route element={<UserRoutes />}>
             <Route path='/account' element={<Account />} />
             <Route path='/profile' element={<Profile />} />
@@ -60,6 +72,17 @@ function App() {
               <Route path='deposit' element={<Deposit />} />
               <Route path='withdrawal' element={<Withdrawal />} />
             </Route>
+          </Route>
+          <Route element={<AdminRoutes />}>
+            <Route path='/admin/all-orders' element={<AllOrders />} />
+            <Route path='/admin/order/:id' element={<EditOrder />} />
+            <Route path='/admin/all-users' element={<AllUsers />} />
+            <Route path='/admin/user/:id' element={<EditUser />} />
+            <Route path='/admin/all-withdrawals' element={<AllWithdrawals />} />
+            <Route path='/admin/withdrawal/:id' element={<EditWithdrawal />} />
+            <Route path='/admin/all-packages' element={<AllPackages />} />
+            <Route path='/admin/package/new' element={<NewPackage />} />
+            <Route path='/admin/package/:id' element={<EditPackage />} />
           </Route>
         </Routes>
         <Footer />

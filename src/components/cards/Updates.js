@@ -3,6 +3,25 @@ import { useUserState } from '../../containers/state/store';
 
 const Updates = () => {
     const user = useUserState((state) => state.user)
+    const invested = useUserState((state) => state.invested)
+    const deposit = useUserState((state) => state.deposit)
+    const profit = useUserState((state) => state.profit)
+
+    // useEffect(() => {
+    //     if (user) {
+    //         console.log(user)
+    //     } 
+    //     if (invested) {
+    //         console.log(invested)
+    //     } 
+    //     if (deposit) {
+    //         console.log(deposit)
+    //     } 
+    //     if (profit) {
+    //         console.log(profit)
+    //     } 
+    // },[user, invested, deposit, profit])
+
 
     return (
         <div>
@@ -32,7 +51,7 @@ const Updates = () => {
                         </div>
                         <div className="flex flex-col justify-center align-middle">
                             <p className="text-2xl font-semibold leading-0">Invested</p>
-                            <p className="capitalize">USD 1020</p>
+                            <p className="capitalize">USD {invested ? invested : 0}</p>
                         </div>
                     </div>
                     <div className="flex p-4 space-x-4 rounded-md shadow-md md:space-x-6 bg-gray-50 text-gray-600">
@@ -47,8 +66,8 @@ const Updates = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-2xl font-semibold leading-0">Earned</p>
-                            <p className="capitalize">USD 899</p>
+                            <p className="text-2xl font-semibold leading-0">Deposit</p>
+                            <p className="capitalize">USD {deposit ? deposit : 0}</p>
                         </div>
                     </div>
                     <div className="flex p-4 space-x-4 rounded-md shadow-md md:space-x-6 bg-gray-50 text-gray-600">
@@ -59,7 +78,7 @@ const Updates = () => {
                         </div>
                         <div className="flex flex-col justify-center align-middle">
                             <p className="text-2xl font-semibold leading-0">Profit</p>
-                            <p className="capitalize">USD 280</p>
+                            <p className="capitalize">USD {profit ? profit : 0}</p>
                         </div>
                     </div>
                 </div>

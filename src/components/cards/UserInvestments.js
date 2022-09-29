@@ -1,11 +1,48 @@
-import React from 'react';
-// import { useUserState } from '../../containers/state/store'
+import React, { useState, useEffect } from 'react';
+import { useUserState } from '../../containers/state/store'
+import instance from '../../containers/services/provider'
+import moment from 'moment'
 
 const UserInvestments = () => {
-    // const user = useUserState((state) => state.user)
+    const [loading, setLoading] = useState('none')
+    const [investments, setInvestments] = useState(null)
+    const user = useUserState((state) => state.user)
+    const setInvested = useUserState((state) => state.setInvested)
+    const setProfit = useUserState((state) => state.setProfit)
+    const setDeposit = useUserState((state) => state.setDeposit)
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading('begin')
+            try {
+                const { data } = await instance.get(`/order/${user._id}`)
+                console.log(data)
+                if (data) {
+                    setInvestments(data.orders)
+                    setLoading('done')
+                    const getInvested = data.orders.filter(order => order.status === 'open' || order.status === 'closed')
+                    const calculateInvested = getInvested.reduce((accumulator, object) => {
+                        return accumulator + object.amount;
+                    }, 0);
+                    setInvested(calculateInvested)
+                    setDeposit(calculateInvested)
+
+                    const getProfit = data.orders.filter(order => order.status === 'closed')
+                    const calculateProfit = getProfit.reduce((accumulator, object) => {
+                        return accumulator + object.amount;
+                    }, 0);
+                    setProfit(calculateProfit)
+                }
+            } catch (error) {
+                console.log(error)
+            }
+        }
+        fetchData();
+    }, [user, setDeposit, setProfit, setInvested]);
+
     return (
         <>
-            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-md">
+            <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow rounded-md">
                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                     <div className="flex flex-wrap items-center">
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1">
@@ -28,92 +65,72 @@ const UserInvestments = () => {
                     <table className="items-center w-full bg-transparent border-collapse">
                         <thead>
                             <tr>
-                                <th className="px-4 text-blueGray-500 bg-sky-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                {/* <th className="px-4 text-blueGray-500 bg-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Package
-                                </th>
-                                <th className="px-4 bg-sky-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                </th> */}
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Invested
                                 </th>
-                                <th className="px-4 bg-sky-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Earned
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    Daily Returns
                                 </th>
-                                <th className="px-4 bg-sky-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    Total Returns
+                                </th>
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Profit
                                 </th>
-                                <th className="px-4 bg-sky-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    Date
+                                </th>
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Status
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    Real Estate
-                                </th>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 400
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 240
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 0
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <span className='bg-green-300 py-1 px-4 rounded'>Open</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    Real Estate
-                                </th>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 120
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 0
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 0
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <span className='bg-yellow-400 py-1 px-4 rounded'>Pending</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    Supermarket
-                                </th>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 100
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 140
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 40
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <span className='bg-sky-300 py-1 px-4 rounded'>Closed</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                    Real Estate
-                                </th>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 400
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 640
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    USD 240
-                                </td>
-                                <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                    <span className='bg-sky-300 py-1 px-4 rounded'>Closed</span>
-                                </td>
-                            </tr>
+                            {loading === 'done' && investments ? (
+                                <>
+                                    {investments.map((investment, idx) => (
+                                        <tr key={idx}>
+                                            {/* <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                                {investment.packageId}
+                                            </th> */}
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                USD {investment.amount}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                USD {investment.dailyReturn}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                USD {investment.totalReturn}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                USD {investment.profit}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                {moment(`${investment.createdAt}`).format('MMMM Do YYYY')}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                {investment.state === 'open' && <span className='bg-green-300 rounded-md px-2 py-0.5'>{investment.state}</span>}
+                                                {investment.state === 'waiting deposit' && <span className='bg-yellow-300 rounded-md px-2 py-0.5'>{investment.state}</span>}
+                                                {investment.state === 'cancelled' && <span className='bg-red-300 rounded-md px-2 py-0.5'>{investment.state}</span>}
+                                                {investment.state === 'closed' && <span className='bg-blue-300 rounded-md text-white px-2 py-0.5'>{investment.state}</span>}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                </>
+                            ) : (
+                                <tr>
+                                    <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
+                                    </th>
+                                    <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                        Loading...
+                                    </td>
+                                    <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                    </td>
+                                </tr>
+                            )}
                         </tbody>
                     </table>
                 </div>

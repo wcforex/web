@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import Dropdown from './Dropdown'
 import { useUserState } from '../containers/state/store';
 
@@ -29,46 +29,73 @@ export default function Navbar() {
                             <div className="navmenu hidden w-full flex-wrap justify-end items-center mb-16 mx-6 space-y-20 p-6 rounded-xl shadow-lg bg-white lg:space-y-0 lg:p-0 lg:m-0 lg:flex md:flex-nowrap lg:bg-transparent lg:w-7/12 lg:shadow-none">
                                 {isLoggedIn ? (
                                     <div className="text-gray-600 lg:pr-4">
-                                        <ul className="space-y-6 tracking-wide font-medium text-lg lg:text-sm lg:flex lg:space-y-0">
-                                            <li>
-                                                <a href="/account" className="block md:px-4 transition hover:text-sky-700">
-                                                    <span>Dashboard</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/plans" className="block md:px-4 transition hover:text-sky-700">
-                                                    <span>Investment Plan</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/deposit" className="block md:px-4 transition hover:text-sky-700">
-                                                    <span>Deposit</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="/withdrawal" className="block md:px-4 transition hover:text-sky-700">
-                                                    <span>Withdraw</span>
-                                                </a>
-                                            </li>
-                                        </ul>
+                                        {user.role === 'admin' ? (
+                                            <ul className="space-y-6 tracking-wide font-medium text-lg lg:text-sm lg:flex lg:space-y-0">
+                                                <li>
+                                                    <NavLink to="/admin/all-orders" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Orders</span>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/admin/all-withdrawals" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Withdrawals</span>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/admin/all-packages" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Packages</span>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/admin/all-users" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Users</span>
+                                                    </NavLink>
+                                                </li>
+
+                                            </ul>
+                                        ) : (
+                                            <ul className="space-y-6 tracking-wide font-medium text-lg lg:text-sm lg:flex lg:space-y-0">
+                                                <li>
+                                                    <NavLink to="/account" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Dashboard</span>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
+                                                    <NavLink to="/plans" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Investment Plan</span>
+                                                    </NavLink>
+                                                </li>
+
+                                                {/* <li>
+                                                    <NavLink to="/deposit" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Deposit</span>
+                                                    </NavLink>
+                                                </li> */}
+                                                <li>
+                                                    <NavLink to="/withdrawal" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Withdraw</span>
+                                                    </NavLink>
+                                                </li>
+                                            </ul>
+                                        )}
                                     </div>
                                 ) : (
                                     <div className="text-gray-600 lg:pr-4">
                                         <ul className="space-y-6 tracking-wide font-medium text-lg lg:text-sm lg:flex lg:space-y-0">
                                             <li>
-                                                <a href="/" className="block md:px-4 transition hover:text-sky-700">
+                                                <NavLink to="/" className="block md:px-4 transition hover:text-sky-700">
                                                     <span>Home</span>
-                                                </a>
+                                                </NavLink>
                                             </li>
                                             <li>
-                                                <a href="/plans" className="block md:px-4 transition hover:text-sky-700">
+                                                <NavLink to="/plans" className="block md:px-4 transition hover:text-sky-700">
                                                     <span>Investment Plan</span>
-                                                </a>
+                                                </NavLink>
                                             </li>
                                             <li>
-                                                <a href="/services" className="block md:px-4 transition hover:text-sky-700">
+                                                <NavLink to="/services" className="block md:px-4 transition hover:text-sky-700">
                                                     <span>Services</span>
-                                                </a>
+                                                </NavLink>
                                             </li>
                                         </ul>
                                     </div>
