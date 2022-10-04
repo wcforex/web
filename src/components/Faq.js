@@ -47,19 +47,6 @@ export const Faq = () => {
         <div class="flex flex-col mb-16 sm:text-center">
           <a href="/" class="mb-6 sm:mx-auto">
             <div class="flex items-center justify-center w-12 h-12 font-medium text-base rounded-full bg-sky-300">
-              {/* <svg
-                class="w-10 h-10 text-deep-purple-accent-400"
-                stroke="currentColor"
-                viewBox="0 0 52 52"
-              >
-                <polygon
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  fill="none"
-                  points="29 13 14 29 25 29 23 39 38 23 27 23"
-                />
-              </svg> */}
               FAQ
             </div>
           </a>
@@ -107,7 +94,7 @@ export const Faq = () => {
           </Item>
           <Item title="3. Can i loose my capital investing with WCFI?">
             Investing on our platform is one of the safest places to invest and watch your money grow.
-            In as much as trading is risky, we are trained to work with a proper risk management in all our trades. 
+            In as much as trading is risky, we are trained to work with a proper risk management in all our trades.
             In this case, losing funds to the markets is highly unacceptable.
           </Item>
           <Item title="4. How fast can my money grow?">
@@ -119,16 +106,14 @@ export const Faq = () => {
             Other platforms offer high as 100% in few weeks, but end up collapsing the firm.
           </Item>
           <Item title="6. How to make a deposit?">
-            WCFI is no Ponzi scheme in the sense that funds contributed by investors are used for active, and professional trading.
-
-            A Ponzi scheme is an investment scam in which early investors are paid returns from funds contributed by later investors.
-            A Ponzi scheme often conducts no business
-          </Item>
-          <Item title="7. How to make money on our platform?">
-           
+            We currently accept Bitcoin and Tether USDT deposits.
+            Select an investment package. Enter amount to invest, Select payment method and confirm.
+            Receive the address to make deposit to.
+            Deposit to the address and get your account credited and investment approved.
           </Item>
           <Item title="7. How do i withdraw from my wallet?">
-           
+            Login to your account. Click on withdrawal. Enter amount to withdraw, Select payment method and confirm.
+            Withdrawals are paid on Wednesdays and Saturdays, between 6am to 8pm respectively.
           </Item>
         </div>
       </div>
