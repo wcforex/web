@@ -5,7 +5,6 @@ import instance from '../../../services/provider';
 export default function EditOrder() {
     const location = useLocation()
     const order = location.state
-    console.log(order.order)
     const navigate = useNavigate()
 
     const [loading, setLoading] = useState(false)
@@ -16,7 +15,6 @@ export default function EditOrder() {
     const fetchData = async () => {
         try {
             const { data } = await instance.get(`/user/${order.order.userId}`);
-            // console.log(data)
             if (data) {
                 setUser(data.user)
             }
@@ -28,7 +26,6 @@ export default function EditOrder() {
     const getPackage = async () => {
         try {
             const { data } = await instance.get(`/package/${order.order.packageId}`);
-            // console.log(data)
             if (data) {
                 setPkg(data.package)
             }
