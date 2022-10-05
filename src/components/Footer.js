@@ -40,7 +40,7 @@ export const Footer = () => {
               title="Our phone"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              233552922712
+              (+1) 080826839
             </a>
           </div>
           <div className="flex">
@@ -54,7 +54,7 @@ export const Footer = () => {
               wolrdclassforexinstitute@gmail.com
             </a>
           </div>
-          <div className="flex">
+          {/* <div className="flex">
             <p className="mr-1 text-gray-800">Address:</p>
             <a
               href="https://www.google.com/maps"
@@ -66,7 +66,7 @@ export const Footer = () => {
             >
               312 Lovely Street, NY
             </a>
-          </div>
+          </div> */}
         </div>
         <div>
           <span className="text-base font-bold tracking-wide text-gray-900">

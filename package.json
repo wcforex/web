@@ -1,5 +1,5 @@
 {
-  "name": "WCFI",
+  "name": "world_class_forex_institute",
   "version": "0.1.0",
   "description": "We are a finacial trading firm that helps individuals to gain daily interest on their investments through professional trading.",
   "private": true,
@@ -14,6 +14,7 @@
     "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-helmet": "^6.1.0",
     "react-router-dom": "^6.4.1",
     "react-scripts": "5.0.1",
     "react-toastify": "^9.0.8",

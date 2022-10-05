@@ -1,8 +1,13 @@
 import React from 'react'
+import { Helmet } from "react-helmet";
 
 export default function Services() {
   return (
     <div>
+      <Helmet>
+        <title>World Class Forex Institute</title>
+        <meta name="description" content="We are a finacial trading firm that helps individuals to gain daily interest on their investments through professional trading." />
+      </Helmet>
       <div className="">
         <section className="mx-auto container pt-28">
           <div className="flex justify-center items-center flex-col">
@@ -41,7 +46,7 @@ export default function Services() {
                 We Provide.
               </h2>
               <p className="text-base text-gray-900 md:text-lg">
-                Let help you with your finances. 
+                Let help you with your finances.
               </p>
             </div>
             <div className=" grid lg:grid-cols-3 md:grid-cols-2 justify-center items-center xl:gap-y-16 gap-y-20 gap-x-16 lg:gap-x-20 xl:gap-x-0 lg:px-10 xl:px-0">
