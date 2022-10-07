@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 //
 import Signin from "./containers/app/auth/Signin"
 import Signup from "./containers/app/auth/Signup"
+import ForgotPassword from './containers/app/auth/ForgotPassword';
 
 import User from "./containers/app/user"
 import Account from "./containers/app/user/account"
@@ -56,6 +57,7 @@ function App() {
           <Route path='*' element={<PageNotFound />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
 
           <Route element={<UserRoutes />}>
             <Route path='/account' element={<Account />} />

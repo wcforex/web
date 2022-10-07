@@ -51,7 +51,7 @@ export const Footer = () => {
               title="Our email"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              wolrdclassforexinstitute@gmail.com
+              worldclassforexinstitute@gmail.com
             </a>
           </div>
           {/* <div className="flex">

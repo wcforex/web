@@ -66,7 +66,7 @@ export default function Signin() {
               <div>
                 <div className="flex justify-between mb-2">
                   <label htmlFor="password" className="text-sm">Password</label>
-                  <a rel="noopener noreferrer" href="/signin" className="text-xs hover:underline text-gray-800">Forgot password?</a>
+                  <a rel="noopener noreferrer" href="/forgot-password" className="text-xs hover:underline text-gray-800">Forgot password?</a>
                 </div>
                 <input type="password" name="password" value={userData.password} id="password" placeholder="*****" onChange={handleChange} className="w-full px-3 py-2 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
