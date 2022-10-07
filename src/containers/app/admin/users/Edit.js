@@ -12,7 +12,7 @@ export default function EditUser() {
   const [lastName, setLastName] = useState(user.pg.lastName)
   const [email, setEmail] = useState(user.pg.email)
   const [wallet, setWallet] = useState(user.pg.wallet)
-  const [bitcoinAddress, setBitcoinAddress] = useState(user.pg.bitcoinAddress)
+  const [usdtAddress, setUsdtAddress] = useState(user.pg.usdtAddress)
   const [role, setRole] = useState(user.pg.role)
 
   const onUpdate = async (e) => {
@@ -23,7 +23,7 @@ export default function EditUser() {
       lastName: lastName,
       email: email,
       wallet: wallet,
-      bitcoinAddress: bitcoinAddress,
+      usdtAddress: usdtAddress,
       role: role,
     }
 
@@ -46,7 +46,7 @@ export default function EditUser() {
           <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="text" name="firstName" value={firstName} onChange={(e) => setFirstName(e.target.value)} placeholder="First Name" />
           <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="text" name="lastName" value={lastName} onChange={(e) => setLastName(e.target.value)} placeholder="Last Name" />
           <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-          <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="text" name="bitcoinAddress" value={bitcoinAddress} onChange={(e) => setBitcoinAddress(e.target.value)} placeholder="Bitcoin Address" />
+          <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="text" name="usdtAddress" value={usdtAddress} onChange={(e) => setUsdtAddress(e.target.value)} placeholder="USDT Address" />
           <input className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded' type="number" name="wallet" value={wallet} onChange={(e) => setWallet(e.target.value)} placeholder="Wallet (USD)" />
           <select name="role" disabled value={role} onChange={(e) => setRole(e.target.value)} className='py-1.5 lg:py-2 xl:py-3 lg:my-0 my-2 border lg:text-sm text-xs outline-none px-2 rounded'>
             <option value='client'>Client</option>

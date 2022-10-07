@@ -8,10 +8,14 @@ function Profile() {
         firstName: user.firstName,
         lastName: user.lastName,
         email: user.email,
-        bitcoinAddress: user.bitcoinAddress,
+        usdtAddress: user.usdtAddress,
         password: user.password,
+        phoneNumber: user.phoneNumber,
     })
 
+    const onChange = (e) => {
+        setUserData({ ...userData, [e.target.name]: e.target.value });
+    }
     const onSubmit = () => {
         setUserData()
     }
@@ -49,27 +53,27 @@ function Profile() {
                                 <div className="md:flex items-center lg:ml-24 lg:mt-0 mt-4">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="firstName" >First name</label>
-                                        <input type="text" value={userData.firstName} name="firstName" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="John" />
+                                        <input type="text" value={userData.firstName} onChange={onChange} name="firstName" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="John" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="lastName">Last name</label>
-                                        <input type="text" tabindex="0" value={userData.lastName} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Doe" />
+                                        <input type="text" tabindex="0" value={userData.lastName} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Doe" />
                                     </div>
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="emailAddress">Email address</label>
-                                        <input type="email" value={userData.email} tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="emailAddress" placeholder="youremail@example.com" />
+                                        <input type="email" value={userData.email} onChange={onChange} tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="emailAddress" placeholder="youremail@example.com" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="phone" >Phone number</label>
-                                        <input disabled type="text" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="phone" placeholder="123-1234567" />
+                                        <input disabled type="number" tabindex="0" value={userData.phoneNumber} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="phone" placeholder="123-1234567" />
                                     </div>
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">Password</label>
-                                        <input type="name" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="password" placeholder="Enter your password" />
+                                        <input type="name" tabindex="0" onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="password" placeholder="Enter your password" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Alternate phone number</label>
@@ -88,12 +92,12 @@ function Profile() {
                             <div>
                                 <div className="md:flex items-center lg:ml-24 lg:mt-0 mt-4">
                                     <div className="md:w-64">
-                                        <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">Bitcoin Address</label>
-                                        <input type="text" value={userData.bitcoinAddress} name='bitcoinAddress' tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="bitcoinAddress" placeholder="Enter your bitcoin address" />
+                                        <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">USDT Address</label>
+                                        <input type="text" value={userData.usdtAddress} onChange={onChange} name='usdtAddress' tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your bitcoin address" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="securityCode">USDT Address</label>
-                                        <input disabled type="text" tabindex="0" name="" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your usdt address" />
+                                        <input disabled type="text" tabindex="0" onChange={onChange} name="" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your usdt address" />
                                     </div>
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">

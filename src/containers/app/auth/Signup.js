@@ -52,31 +52,31 @@ const Signup = () => {
             <div className="w-full flex lg:justify-between justify-center flex-wrap">
               <div>
                 <label htmlFor="firstName" className="block text-sm">First name</label>
-                <input type="text" name="firstName" value={userData.firstName} id="firstName" onChange={handleChange} placeholder="John" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="text" name="firstName" value={userData.firstName} id="firstName" onChange={handleChange} placeholder="First name" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
               <div>
                 <label htmlFor="lastName" className="block text-sm">Last name</label>
-                <input type="text" name="lastName" value={userData.lastName} id="lastName" onChange={handleChange} placeholder="Doe" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="text" name="lastName" value={userData.lastName} id="lastName" onChange={handleChange} placeholder="Last name" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
             </div>
             <div className="flex lg:justify-between justify-center flex-wrap">
               <div>
                 <label htmlFor="email" className="block text-sm">Email</label>
-                <input type="email" name="email" value={userData.email} id="email" onChange={handleChange} placeholder="johndoe@gmail.com" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="email" name="email" value={userData.email} id="email" onChange={handleChange} placeholder="Enter your email" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
               <div>
                 <label htmlFor="phoneNumber" className="block text-sm">Phone number</label>
-                <input type="number" name="phoneNumber" value={userData.phoneNumber} id="phoneNumber" onChange={handleChange} placeholder="2330543990488" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="number" name="phoneNumber" value={userData.phoneNumber} id="phoneNumber" onChange={handleChange} placeholder="Phone number" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
             </div>
             <div className="flex lg:justify-between justify-center flex-wrap">
               <div>
                 <label htmlFor="country" className="block text-sm">Country</label>
-                <input type="text" name="country" value={userData.country} id="country" onChange={handleChange} placeholder="Ireland" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="text" name="country" value={userData.country} id="country" onChange={handleChange} placeholder="Enter your country name" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
               <div>
                 <label htmlFor="usdtAddress" className="block text-sm">USDT Address</label>
-                <input type="text" name="usdtAddress" value={userData.usdtAddress} id="usdtAddress" onChange={handleChange} placeholder="1WxJ2HDshHSJ39HvHi0Ka72aFS" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type="text" name="usdtAddress" value={userData.usdtAddress} id="usdtAddress" onChange={handleChange} placeholder="Enter your USDT address" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
             </div>
             <div className="flex lg:justify-between justify-center flex-wrap">
@@ -85,7 +85,7 @@ const Signup = () => {
                   <span>Password</span>
                   <span onClick={() => setShow(!show)} className='text-sky-200 cursor-pointer'>View</span>
                 </label>
-                <input type={show ? 'text' : 'password'} name="password" value={userData.password} id="password" onChange={handleChange} placeholder="********************" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
+                <input type={show ? 'text' : 'password'} name="password" value={userData.password} id="password" onChange={handleChange} placeholder="Password" className="w-full px-3 py-2 mb-4 border rounded-md outline-none border-gray-700 text-gray-800" />
               </div>
               <div>
                 <label htmlFor="referralCode" className="block text-sm">Refferral</label>

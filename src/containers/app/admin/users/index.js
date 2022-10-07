@@ -66,7 +66,7 @@ const AllUsers = () => {
                                     Email
                                 </th>
                                 <th className="px-4 text-blueGray-500 bg-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    BTC Address
+                                    USDT Address
                                 </th>
                                 <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Wallet
@@ -94,7 +94,7 @@ const AllUsers = () => {
                                                 {pg.email}
                                             </th>
                                             <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                                {pg.bitcoinAddress}
+                                                {pg.usdtAddress}
                                             </th>
                                             <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                 USD {pg.wallet}
