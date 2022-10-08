@@ -18,7 +18,6 @@ export default function Signin() {
 
   const navigate = useNavigate()
   const setUser = useUserState((state) => state.setUser)
-  // console.log(setUser)
   const setToken = useUserState((state) => state.setToken)
   const setRefreshToken = useUserState((state) => state.setRefreshToken)
 

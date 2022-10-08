@@ -1,27 +1,34 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUserState } from '../../containers/state/store';
+import instance from '../../containers/services/provider'
 
 const Updates = () => {
+    const [userData, setUserData] = useState()
+    const [loading, setLoading] = useState(false)
     const user = useUserState((state) => state.user)
-    const invested = useUserState((state) => state.invested)
-    const deposit = useUserState((state) => state.deposit)
-    const profit = useUserState((state) => state.profit)
 
-    // useEffect(() => {
-    //     if (user) {
-    //         console.log(user)
-    //     } 
-    //     if (invested) {
-    //         console.log(invested)
-    //     } 
-    //     if (deposit) {
-    //         console.log(deposit)
-    //     } 
-    //     if (profit) {
-    //         console.log(profit)
-    //     } 
-    // },[user, invested, deposit, profit])
+    const fetchData = async () => {
+        setLoading(true)
+        try {
+            const { data } = await instance.get(`/user/${user._id}`)
+            console.log(data)
+            if (data) {
+                setUserData(data.user)
+                setLoading(false)
+            }
+        } catch (error) {
+            setLoading(false)
+            // if (error) {
+            //     console.log(error)
+            //     alert(error.message)
+            // }
+        }
+    }
 
+    useEffect(() => {
+        fetchData()
+        // eslint-disable-next-line
+    }, [user])
 
     return (
         <div>
@@ -37,7 +44,9 @@ const Updates = () => {
                         </div>
                         <div className="flex flex-col justify-center align-middle">
                             <p className="text-2xl font-semibold leading-0">Wallet</p>
-                            <p className="capitalize">USD {user.wallet}</p>
+                            <p className="capitalize">USD {userData ? userData.wallet : (
+                                <> {loading ? 'loading' : 0}</>
+                            )}</p>
                         </div>
                     </div>
                     <div className="flex p-4 space-x-4 rounded-md shadow-md md:space-x-6 bg-gray-50 text-gray-600">
@@ -51,7 +60,9 @@ const Updates = () => {
                         </div>
                         <div className="flex flex-col justify-center align-middle">
                             <p className="text-2xl font-semibold leading-0">Invested</p>
-                            <p className="capitalize">USD {invested ? invested : 0}</p>
+                            <p className="capitalize">USD {userData ? userData.invested : (
+                                <> {loading ? 'loading' : 0}</>
+                            )}</p>
                         </div>
                     </div>
                     <div className="flex p-4 space-x-4 rounded-md shadow-md md:space-x-6 bg-gray-50 text-gray-600">
@@ -66,8 +77,10 @@ const Updates = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-2xl font-semibold leading-0">Deposit</p>
-                            <p className="capitalize">USD {deposit ? deposit : 0}</p>
+                            <p className="text-2xl font-semibold leading-0">Withdrawal</p>
+                            <p className="capitalize">USD {userData ? userData.withdrawal : (
+                                <>{loading ? 'loading' : 0}</>
+                            )}</p>
                         </div>
                     </div>
                     <div className="flex p-4 space-x-4 rounded-md shadow-md md:space-x-6 bg-gray-50 text-gray-600">
@@ -78,7 +91,9 @@ const Updates = () => {
                         </div>
                         <div className="flex flex-col justify-center align-middle">
                             <p className="text-2xl font-semibold leading-0">Profit</p>
-                            <p className="capitalize">USD {profit ? profit : 0}</p>
+                            <p className="capitalize">USD {userData ? userData.profit : (
+                                <> {loading ? 'loading' : 0}</>
+                            )}</p>
                         </div>
                     </div>
                 </div>

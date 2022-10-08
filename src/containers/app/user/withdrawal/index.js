@@ -1,7 +1,7 @@
 import { Fragment, useState, useEffect } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import instance from '../../../services/provider'
 import { useUserState } from '../../../state/store';
 
@@ -12,6 +12,8 @@ function classNames(...classes) {
 const Withdrawal = () => {
     const [loading, setLoading] = useState('none')
     const [paymentMethods, setPaymentMethods] = useState(null)
+    const [userdata, setUserdata] = useState()
+    const navigate = useNavigate()
 
     const fetchData = async () => {
         setLoading('begin')
@@ -23,10 +25,24 @@ const Withdrawal = () => {
             console.log(error)
         }
     }
+    const getUser = async () => {
+        try {
+            const { data } = await instance.get(`/user/${user._id}`)
+            console.log(data)
+            if (data) {
+                setUserdata(data.user)
+            }
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
+        getUser()
         fetchData();
-    });
+        // eslint-disable-next-line 
+    }, []);
+
 
     const [amount, setAmount] = useState(0)
     const [address, setAddress] = useState(null)
@@ -35,27 +51,33 @@ const Withdrawal = () => {
         visible: '',
         message: ''
     })
-    // const [loader, setLoader] = useState(false)
+    const [loader, setLoader] = useState(false)
     const user = useUserState((state) => state.user)
 
     const onConfirm = async (e) => {
+        setLoader(true)
         e.preventDefault()
+
         if (selected === null) {
+            setLoader(false)
             setAlert({ visible: 'select', message: '🚫Please select a payment method!' })
         } else {
             if (amount === null || amount === 0 || amount === '0' || amount === undefined || amount === '') {
+                setLoader(false)
                 setAlert({ visible: 'empty', message: '🚫Please enter amount to withdraw!' })
             } else {
-                if (amount > user.wallet) {
+                if (amount > userdata.wallet) {
+                    setLoader(false)
                     setAlert({ visible: 'wallet', message: `Amount entered is above your wallet total!` })
                 } else {
                     if (amount < 20) {
+                        setLoader(false)
                         setAlert({ visible: 'minimum', message: `The minimum withdrawal is USD20!` })
                     } else {
                         if (address === null || address === '') {
+                            setLoader(false)
                             setAlert({ visible: 'address', message: `Address mast not be empty!` })
                         } else {
-                            // setLoader(true)
                             const payload = {
                                 userId: user._id,
                                 userName: user.firstName + ' ' + user.lastName,
@@ -64,15 +86,15 @@ const Withdrawal = () => {
                                 account: address
                             }
                             try {
-                                const withdraw = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
-                                console.log(withdraw)
-                                // if (withdraw) {
-                                //     alert('Withdraw created successfully')
-                                //     setLoader(false)
-                                // }
-
+                                const { data } = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
+                                console.log(data)
+                                setLoader(false)
+                                if (data) {
+                                    setLoader(false)
+                                    navigate('/account')
+                                }
                             } catch (error) {
-                                // setLoader(false)
+                                setLoader(false)
                                 console.log(error)
                             }
                         }
@@ -199,7 +221,15 @@ const Withdrawal = () => {
                             </dd>
                         </div>
                         <div className='py-2 flex justify-center'>
-                            <button type="submit" className="text-gray-50 bg-sky-600 border border-gray-200 outline-none font-medium rounded-lg text-sm px-10 py-2 text-center inline-flex items-center">
+                            <button type="submit" className="text-gray-50 justify-center bg-sky-600 border border-gray-200 outline-none font-medium rounded-lg text-sm px-10 py-2 text-center inline-flex items-center">
+                                {loader && <svg className="h-4 w-4 animate-spin" viewBox="3 3 18 18">
+                                    <path
+                                        className="fill-sky-400"
+                                        d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                                    <path
+                                        className="fill-blue-100"
+                                        d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                                </svg>}
                                 Withdraw
                             </button>
                         </div>

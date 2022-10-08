@@ -47,6 +47,11 @@ export default function Navbar() {
                                                     </NavLink>
                                                 </li>
                                                 <li>
+                                                    <NavLink to="/admin/payment-method" className="block md:px-4 transition hover:text-sky-700">
+                                                        <span>Payment Method</span>
+                                                    </NavLink>
+                                                </li>
+                                                <li>
                                                     <NavLink to="/admin/all-users" className="block md:px-4 transition hover:text-sky-700">
                                                         <span>Users</span>
                                                     </NavLink>
@@ -65,12 +70,6 @@ export default function Navbar() {
                                                         <span>Investment Plan</span>
                                                     </NavLink>
                                                 </li>
-
-                                                {/* <li>
-                                                    <NavLink to="/deposit" className="block md:px-4 transition hover:text-sky-700">
-                                                        <span>Deposit</span>
-                                                    </NavLink>
-                                                </li> */}
                                                 <li>
                                                     <NavLink to="/withdrawal" className="block md:px-4 transition hover:text-sky-700">
                                                         <span>Withdraw</span>
@@ -102,11 +101,11 @@ export default function Navbar() {
                                 )}
                                 {isLoggedIn ? (
                                     <div className="w-full space-y-2 border-sky-200 flex flex-col -ml-1 sm:flex-row lg:space-y-0 md:w-max lg:border-l">
-                                        <button type="button" title="Start buying" className="w-full py-2.5 px-5 text-center rounded-full transition sm:w-max">
+                                        {/* <button type="button" title="Start buying" className="w-full py-2.5 px-5 text-center rounded-full transition sm:w-max">
                                             <span className="block text-sky-800 font-semibold lg:text-sm">
-                                                USD {user.wallet}
+                                                USD {userData ? userData.wallet : (<>{loading ? 'updating wallet...' : ''}</>)}
                                             </span>
-                                        </button>
+                                        </button> */}
                                         <Dropdown />
                                     </div>
                                 ) : <div className="w-full space-y-2 border-sky-200 flex flex-col -ml-1 sm:flex-row lg:space-y-0 md:w-max lg:border-l">

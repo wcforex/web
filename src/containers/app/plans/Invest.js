@@ -70,6 +70,12 @@ const Invest = () => {
         if (amount === null || amount === 0 || amount === '0' || amount === undefined || amount === '') {
             setAlert({ visible: 'amount0', message: '🚫Please enter amount to invest!' })
         }
+        if (amount < selected.minDeposite) {
+            setAlert({ visible: 'amount1', message: `🚫Minimum deposit of selected package is ${selected.minDeposite}!` })
+        }
+        if (amount > selected.maxDeposite) {
+            setAlert({ visible: 'amount2', message: `🚫Maximum deposit of selected package is ${selected.maxDeposite}!` })
+        }
         if (amount > 0 && selected && picked) {
             // console.log({ amount, selected, picked })
             navigate(`/confirm/${selected._id}`, { state: { amount, selected, picked } })
@@ -189,6 +195,8 @@ const Invest = () => {
                                         placeholder="Enter amount to invest"
                                         className="block w-full rounded-md py-2 px-2 border border-gray-200 text-sm outline-none transition focus:border focus:border-sky-600 focus:ring-sky-600 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75" />
                                     {alert.visible === "amount0" && <span className='text-sm text-red-600'>{alert.message}</span>}
+                                    {alert.visible === "amount1" && <span className='text-sm text-red-600'>{alert.message}</span>}
+                                    {alert.visible === "amount2" && <span className='text-sm text-red-600'>{alert.message}</span>}
                                 </div>
                             </dd>
                         </div>

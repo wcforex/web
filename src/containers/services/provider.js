@@ -13,6 +13,7 @@ const AxiosInterceptor = ({ children }) => {
     const token = useUserState((state) => state.token)
     const setToken = useUserState((state) => state.setToken);
     const refreshtoken = useUserState((state) => state.refreshToken);
+    // const logOut = useUserState((state) => state.logOut);
     // console.log(refreshtoken, token)
 
     useEffect(() => {
@@ -37,9 +38,10 @@ const AxiosInterceptor = ({ children }) => {
                 // console.log(err)
                 if (originalConfig.url !== "/auth/signin" && err.response) {
                     // Access Token was expired
-                    if (err.response.status === 401 || err.response.status === 403) { 
+                    if (err.response.status === 401 || err.response.status === 403) {
                         originalConfig._retry = true;
                         try {
+                            // logOut()
                             const rs = await instance.post("/auth/refreshtoken", refreshtoken);
                             const { accessToken } = rs.data;
                             setToken(accessToken);

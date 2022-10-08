@@ -41,6 +41,9 @@ import EditWithdrawal from './containers/app/admin/withdrawal/Edit';
 import AllPackages from './containers/app/admin/packages';
 import NewPackage from './containers/app/admin/packages/New';
 import EditPackage from './containers/app/admin/packages/Edit';
+import PaymentMethod from './containers/app/admin/payment-method';
+import EditPaymentMethod from './containers/app/admin/payment-method/Edit';
+import NewPaymentMethod from './containers/app/admin/payment-method/New';
 
 function App() {
   return (
@@ -85,6 +88,9 @@ function App() {
             <Route path='/admin/all-packages' element={<AllPackages />} />
             <Route path='/admin/package/new' element={<NewPackage />} />
             <Route path='/admin/package/:id' element={<EditPackage />} />
+            <Route path='/admin/payment-method' element={<PaymentMethod />} />
+            <Route path='/admin/payment-method/:id' element={<EditPaymentMethod />} />
+            <Route path='/admin/payment-method/new' element={<NewPaymentMethod />} />
           </Route>
         </Routes>
         <Footer />

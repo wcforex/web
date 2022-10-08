@@ -7,9 +7,6 @@ const UserInvestments = () => {
     const [loading, setLoading] = useState('none')
     const [investments, setInvestments] = useState(null)
     const user = useUserState((state) => state.user)
-    const setInvested = useUserState((state) => state.setInvested)
-    const setProfit = useUserState((state) => state.setProfit)
-    const setDeposit = useUserState((state) => state.setDeposit)
 
     useEffect(() => {
         const fetchData = async () => {
@@ -20,25 +17,13 @@ const UserInvestments = () => {
                 if (data) {
                     setInvestments(data.orders)
                     setLoading('done')
-                    const getInvested = data.orders.filter(order => order.status === 'open' || order.status === 'closed')
-                    const calculateInvested = getInvested.reduce((accumulator, object) => {
-                        return accumulator + object.amount;
-                    }, 0);
-                    setInvested(calculateInvested)
-                    setDeposit(calculateInvested)
-
-                    const getProfit = data.orders.filter(order => order.status === 'closed')
-                    const calculateProfit = getProfit.reduce((accumulator, object) => {
-                        return accumulator + object.amount;
-                    }, 0);
-                    setProfit(calculateProfit)
                 }
             } catch (error) {
                 console.log(error)
             }
         }
         fetchData();
-    }, [user, setDeposit, setProfit, setInvested]);
+    }, [user]);
 
     return (
         <>

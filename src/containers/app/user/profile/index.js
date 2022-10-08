@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { useUserState } from "../../../state/store";
+import instance from '../../../services/provider'
 
 function Profile() {
     const user = useUserState((state) => state.user)
-
+    const setUser = useUserState((state) => state.setUser)
+    const [loading, setLoading] = useState(false)
     const [userData, setUserData] = useState({
         firstName: user.firstName,
         lastName: user.lastName,
@@ -11,13 +13,27 @@ function Profile() {
         usdtAddress: user.usdtAddress,
         password: user.password,
         phoneNumber: user.phoneNumber,
+        country: user.country,
     })
 
     const onChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
     }
-    const onSubmit = () => {
-        setUserData()
+    const onSubmit = async (e) => {
+        setLoading(true);
+        e.preventDefault();
+        try {
+            const { data } = await instance.patch(`/user/${user._id}`, userData)
+            console.log(data)
+            if (data) {
+                setUser(data.user);
+                setLoading(false);
+                alert('Profile updated successfully')
+            }
+        } catch (error) {
+            setLoading(false);
+            console.log(error)
+        }
     }
 
     return (
@@ -53,31 +69,31 @@ function Profile() {
                                 <div className="md:flex items-center lg:ml-24 lg:mt-0 mt-4">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="firstName" >First name</label>
-                                        <input type="text" value={userData.firstName} onChange={onChange} name="firstName" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="John" />
+                                        <input type="text" name='firstName' value={userData.firstName} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="firstName" placeholder="" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="lastName">Last name</label>
-                                        <input type="text" tabindex="0" value={userData.lastName} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="Doe" />
+                                        <input type="text" name="lastName" value={userData.lastName} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="lastName" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="emailAddress">Email address</label>
-                                        <input type="email" value={userData.email} onChange={onChange} tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="emailAddress" placeholder="youremail@example.com" />
+                                        <input type="email" name="email" value={userData.email} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="emailAddress" placeholder="" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="phone" >Phone number</label>
-                                        <input disabled type="number" tabindex="0" value={userData.phoneNumber} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="phone" placeholder="123-1234567" />
+                                        <input type="number" name="phoneNumber" value={userData.phoneNumber} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="phoneNumber" placeholder="" />
                                     </div>
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">Password</label>
-                                        <input type="name" tabindex="0" onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="password" placeholder="Enter your password" />
+                                        <input type="password" disabled name="password" value={userData.password} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="password" placeholder="" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
-                                        <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Alternate phone number</label>
-                                        <input disabled type="name" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="altPhone" placeholder="Your alternate phone number" />
+                                        <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Country</label>
+                                        <input disabled type="name" name="country" value={userData.country} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="country" placeholder="" />
                                     </div>
                                 </div>
                             </div>
@@ -93,26 +109,34 @@ function Profile() {
                                 <div className="md:flex items-center lg:ml-24 lg:mt-0 mt-4">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">USDT Address</label>
-                                        <input type="text" value={userData.usdtAddress} onChange={onChange} name='usdtAddress' tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your bitcoin address" />
+                                        <input type="text" name="usdtAddress" value={userData.usdtAddress} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="" />
                                     </div>
-                                    <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
+                                    {/* <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="securityCode">USDT Address</label>
-                                        <input disabled type="text" tabindex="0" onChange={onChange} name="" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your usdt address" />
-                                    </div>
+                                        <input disabled type="text" onChange={onChange} name="" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your usdt address" />
+                                    </div> */}
                                 </div>
-                                <div className="md:flex items-center lg:ml-24 mt-8">
+                                {/* <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="recoverEmail">Litecoin Address</label>
-                                        <input disabled type="text" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="litecoinAddress" placeholder="Enter your litecoin address" />
+                                        <input disabled type="text" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="litecoinAddress" placeholder="Enter your litecoin address" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Dogecoin Address</label>
-                                        <input disabled type="text" tabindex="0" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="dogecoinAddress" placeholder="Enter your dogecoin address" />
+                                        <input disabled type="text" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="dogecoinAddress" placeholder="Enter your dogecoin address" />
                                     </div>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                         <button type="submit" aria-label="Submit" className="flex items-center mx-auto my-0 justify-center py-2 px-16 focus:outline-none bg-sky-700 rounded md:mt-4">
+                            {loading && <svg className="h-4 w-4 animate-spin" viewBox="3 3 18 18">
+                                <path
+                                    className="fill-sky-400"
+                                    d="M12 5C8.13401 5 5 8.13401 5 12C5 15.866 8.13401 19 12 19C15.866 19 19 15.866 19 12C19 8.13401 15.866 5 12 5ZM3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12Z"></path>
+                                <path
+                                    className="fill-blue-100"
+                                    d="M16.9497 7.05015C14.2161 4.31648 9.78392 4.31648 7.05025 7.05015C6.65973 7.44067 6.02656 7.44067 5.63604 7.05015C5.24551 6.65962 5.24551 6.02646 5.63604 5.63593C9.15076 2.12121 14.8492 2.12121 18.364 5.63593C18.7545 6.02646 18.7545 6.65962 18.364 7.05015C17.9734 7.44067 17.3403 7.44067 16.9497 7.05015Z"></path>
+                            </svg>}
                             <span className="lg:text-sm text-xs font-medium text-center text-sky-50 capitalize">Save</span>
                         </button>
                     </form>

@@ -47,10 +47,11 @@ export default function EditOrder() {
         }
         try {
             const { data } = await instance.patch(`/order/${order.order._id}`, payload)
+            console.log(data)
             if (data) {
                 setLoading(false)
                 alert("Order was successfully updated.")
-                navigate(-1)
+                // navigate(-1)
             }
         } catch (error) {
             setLoading(false)
