@@ -3,6 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import Message from '../../../components/Message'
 import instance from '../../services/provider';
 
+
+let code = '';
+let codeLenght = parseInt(8);
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789#';
+for (var i = 0; i < codeLenght; i++) {
+  code += chars.charAt(Math.floor(Math.random() * chars.length));
+}
 const Signup = () => {
   const [userData, setUserData] = useState({
     firstName: "",
@@ -13,6 +20,7 @@ const Signup = () => {
     phoneNumber: "",
     password: "",
     referralCode: "",
+    myCode: code,
   })
 
   const [error, setError] = useState()

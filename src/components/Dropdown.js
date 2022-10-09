@@ -3,6 +3,7 @@ import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { useUserState } from '../containers/state/store';
+import { NavLink } from 'react-router-dom';
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
@@ -33,28 +34,28 @@ export default function Example() {
                     <div className="py-1">
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="/profile"
+                                <NavLink
+                                    to="/profile"
                                     className={classNames(
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
                                     Profile
-                                </a>
+                                </NavLink>
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="contact"
+                                <NavLink
+                                    to="contact"
                                     className={classNames(
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
                                     Contact us
-                                </a>
+                                </NavLink>
                             )}
                         </Menu.Item>
                     </div>

@@ -15,6 +15,7 @@ function Profile() {
         phoneNumber: user.phoneNumber,
         country: user.country,
     })
+    const referralCode = user.myCode;
 
     const onChange = (e) => {
         setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -111,21 +112,25 @@ function Profile() {
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">USDT Address</label>
                                         <input type="text" name="usdtAddress" value={userData.usdtAddress} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="" />
                                     </div>
+                                    <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
+                                        <h4>Share your referral code and get 10% of first package profit for every person who registers with your code.</h4>
+                                        <div >Referral code: <code className="bg-sky-200">{referralCode}</code></div>
+                                    </div>
                                     {/* <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="securityCode">USDT Address</label>
                                         <input disabled type="text" onChange={onChange} name="" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="usdtAddress" placeholder="Enter your usdt address" />
                                     </div> */}
                                 </div>
-                                {/* <div className="md:flex items-center lg:ml-24 mt-8">
-                                    <div className="md:w-64">
+                                <div className="md:flex items-center lg:ml-24 mt-8">
+                                    {/* <div className="md:w-64">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="recoverEmail">Litecoin Address</label>
                                         <input disabled type="text" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="litecoinAddress" placeholder="Enter your litecoin address" />
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Dogecoin Address</label>
                                         <input disabled type="text" className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="dogecoinAddress" placeholder="Enter your dogecoin address" />
-                                    </div>
-                                </div> */}
+                                    </div> */}
+                                </div>
                             </div>
                         </div>
                         <button type="submit" aria-label="Submit" className="flex items-center mx-auto my-0 justify-center py-2 px-16 focus:outline-none bg-sky-700 rounded md:mt-4">
