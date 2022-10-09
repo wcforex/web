@@ -60,7 +60,6 @@ const Invest = () => {
 
     const onConfirm = (e) => {
         e.preventDefault()
-        console.log('reading: ', amount)
         if (selected === null) {
             setAlert({ visible: 'selected0', message: '🚫Please select a package!' })
         }

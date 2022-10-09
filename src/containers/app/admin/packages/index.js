@@ -12,7 +12,7 @@ const AllPackages = () => {
         setLoading('begin')
         try {
             const { data } = await instance.get('/package/all')
-            console.log(data)
+            // console.log(data)
             if (data) {
                 setPackages(data.packages)
                 setLoading('done')

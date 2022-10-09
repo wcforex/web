@@ -26,7 +26,7 @@ export default function Signin() {
     setLoading(true)
     try {
       const { data } = await instance.post('/auth/login', userData).then((response) => Promise.resolve(response))
-      console.log(data)
+      // console.log(data)
       if (data.user) {
         setToken(data.accessToken)
         setRefreshToken(data.refreshToken)

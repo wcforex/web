@@ -28,7 +28,7 @@ const Withdrawal = () => {
     const getUser = async () => {
         try {
             const { data } = await instance.get(`/user/${user._id}`)
-            console.log(data)
+            // console.log(data)
             if (data) {
                 setUserdata(data.user)
             }
@@ -87,7 +87,7 @@ const Withdrawal = () => {
                             }
                             try {
                                 const { data } = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
-                                console.log(data)
+                                // console.log(data)
                                 setLoader(false)
                                 if (data) {
                                     setLoader(false)

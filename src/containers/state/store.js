@@ -11,7 +11,7 @@ const userState = persist(
         profit: null,
         deposit: null,
         setUser: (user) => {
-            console.log({ user });
+            // console.log({ user });
             set(() => ({ user, isLoggedIn: true }));
         },
         setToken: (token) => {

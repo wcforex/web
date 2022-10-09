@@ -11,7 +11,7 @@ const Updates = () => {
         setLoading(true)
         try {
             const { data } = await instance.get(`/user/${user._id}`)
-            console.log(data)
+            // console.log(data)
             if (data) {
                 setUserData(data.user)
                 setLoading(false)

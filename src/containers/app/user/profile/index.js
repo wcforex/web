@@ -25,7 +25,7 @@ function Profile() {
         e.preventDefault();
         try {
             const { data } = await instance.patch(`/user/${user._id}`, userData)
-            console.log(data)
+            // console.log(data)
             if (data) {
                 setUser(data.user);
                 setLoading(false);
@@ -114,7 +114,7 @@ function Profile() {
                                     </div>
                                     <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <h4>Share your referral code and get 10% of first package profit for every person who registers with your code.</h4>
-                                        <div >Referral code: <code className="bg-sky-200">{referralCode}</code></div>
+                                        <div >Referral code: <code className="bg-sky-600 px-2 py-1 text-white rounded-md">{referralCode}</code></div>
                                     </div>
                                     {/* <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="securityCode">USDT Address</label>

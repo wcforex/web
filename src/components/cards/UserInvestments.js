@@ -13,7 +13,7 @@ const UserInvestments = () => {
             setLoading('begin')
             try {
                 const { data } = await instance.get(`/order/${user._id}`)
-                console.log(data)
+                // console.log(data)
                 if (data) {
                     setInvestments(data.orders)
                     setLoading('done')

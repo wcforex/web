@@ -1,15 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Message from '../../../components/Message'
 import instance from '../../services/provider';
 
 
-let code = '';
-let codeLenght = parseInt(8);
-const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789#';
-for (var i = 0; i < codeLenght; i++) {
-  code += chars.charAt(Math.floor(Math.random() * chars.length));
-}
 const Signup = () => {
   const [userData, setUserData] = useState({
     firstName: "",
@@ -20,7 +14,7 @@ const Signup = () => {
     phoneNumber: "",
     password: "",
     referralCode: "",
-    myCode: code,
+    myCode: "",
   })
 
   const [error, setError] = useState()
@@ -31,6 +25,17 @@ const Signup = () => {
   const handleChange = (e) => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    let code = '';
+    let codeLenght = parseInt(8);
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789#';
+    for (var i = 0; i < codeLenght; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    setUserData({ myCode: code });
+    // eslint-disable-next-line
+  }, [])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
