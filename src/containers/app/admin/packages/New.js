@@ -5,11 +5,11 @@ import instance from '../../../services/provider';
 export default function NewPackage() {
   const [loading, setLoading] = useState(false)
   const [name, setName] = useState("")
-  const [duration, setDuration] = useState()
-  const [maxDeposit, setMaxDeposit] = useState()
-  const [minDeposit, setMinDeposit] = useState()
-  const [dailyInterest, setDailyInterest] = useState()
-  const [totalReturn, setTotalReturn] = useState()
+  const [duration, setDuration] = useState(0)
+  const [maxDeposit, setMaxDeposit] = useState(0)
+  const [minDeposit, setMinDeposit] = useState(0)
+  const [dailyInterest, setDailyInterest] = useState(0)
+  const [totalReturn, setTotalReturn] = useState(0)
   const [status, setStatus] = useState("")
   const navigate = useNavigate()
 
@@ -18,15 +18,17 @@ export default function NewPackage() {
     setLoading(true)
     const payload = {
       name: name,
-      duration: duration,
-      maxDeposite: maxDeposit,
-      minDeposite: minDeposit,
-      interestRatePerDay: dailyInterest,
-      interestRate: totalReturn,
+      duration: parseInt(duration),
+      maxDeposite: parseInt(maxDeposit),
+      minDeposite: parseInt(minDeposit),
+      interestRatePerDay: parseInt(dailyInterest),
+      interestRate: parseInt(totalReturn),
       status: status,
     }
+    // console.log(payload)
     try {
-      const { data } = await instance.patch(`/package/create`, payload)
+      const { data } = await instance.post('/package/create', payload)
+      console.log(data)
       if (data) {
         setLoading(false)
         alert("Package created!!")

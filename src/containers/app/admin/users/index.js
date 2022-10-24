@@ -63,7 +63,7 @@ const AllUsers = () => {
                                     Name
                                 </th>
                                 <th className="px-4 text-blueGray-500 bg-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                    Email
+                                    Phone Number
                                 </th>
                                 <th className="px-4 text-blueGray-500 bg-gray-200 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     USDT Address
@@ -94,7 +94,7 @@ const AllUsers = () => {
                                                 {pg.firstName + " " + pg.lastName}
                                             </th>
                                             <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
-                                                {pg.email}
+                                                {pg.phoneNumber}
                                             </th>
                                             <th className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left">
                                                 {pg.usdtAddress}
@@ -115,7 +115,7 @@ const AllUsers = () => {
                                                 <button type="button" className='bg-white border border-sky-400 rounded hover:bg-sky-400 text-gray-900 py-1 px-2' onClick={() => onEdit(pg)}>Edit</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse()}
                                 </>
                             ) : (
                                 <tr>

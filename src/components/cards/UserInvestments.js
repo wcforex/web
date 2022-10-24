@@ -103,7 +103,7 @@ const UserInvestments = () => {
                                                 {investment.state === 'closed' && <span className='bg-blue-300 rounded-md text-white px-2 py-0.5'>{investment.state}</span>}
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse()}
                                 </>
                             ) : (
                                 <tr>

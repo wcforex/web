@@ -11,7 +11,6 @@ function Profile() {
         lastName: user.lastName,
         email: user.email,
         usdtAddress: user.usdtAddress,
-        password: user.password,
         phoneNumber: user.phoneNumber,
         country: user.country,
     })
@@ -89,12 +88,8 @@ function Profile() {
                                 </div>
                                 <div className="md:flex items-center lg:ml-24 mt-8">
                                     <div className="md:w-64">
-                                        <label className="lg:text-sm text-xs leading-none text-gray-800" id="password">Password</label>
-                                        <input type="password" disabled name="password" value={userData.password} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="password" placeholder="" />
-                                    </div>
-                                    <div className="md:w-64 md:ml-12 md:mt-0 mt-4">
                                         <label className="lg:text-sm text-xs leading-none text-gray-800" id="altPhone">Country</label>
-                                        <input disabled type="name" name="country" value={userData.country} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="country" placeholder="" />
+                                        <input type="name" name="country" value={userData.country} onChange={onChange} className="w-full p-2 lg:p-3 mt-3 bg-gray-100 border rounded border-gray-200 focus:outline-none focus:border-gray-600 lg:text-sm text-xs font-medium leading-none text-gray-800" aria-labelledby="country" placeholder="" />
                                     </div>
                                 </div>
                             </div>

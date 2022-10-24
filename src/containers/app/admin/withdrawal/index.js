@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import instance from '../../../services/provider';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import moment from 'moment'
 
 
@@ -29,7 +29,7 @@ const AllWithdrawals = () => {
 
     const onEdit = (pg) => {
         navigate(`/admin/withdrawal/${pg._id}`, { state: { pg } })
-     }
+    }
     return (
         <div className='py-24 px-4 lg:px-5 xl:px-5'>
             <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow rounded-md">
@@ -41,15 +41,12 @@ const AllWithdrawals = () => {
                             </h3>
                         </div>
                         <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                            <Link to='/admin/package/new'>
-                                <button
-                                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                                    type="button"
-                                >
-                                    Withdrawal
-                                </button>
-                            </Link>
-
+                            <button
+                                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                type="button"
+                            >
+                                Withdrawal
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -66,6 +63,9 @@ const AllWithdrawals = () => {
                                 </th>
                                 <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Payment Method
+                                </th>
+                                <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                    Wallet
                                 </th>
                                 <th className="px-4 bg-gray-200 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                     Date
@@ -93,6 +93,9 @@ const AllWithdrawals = () => {
                                                 {pg.paymentMethod}
                                             </td>
                                             <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
+                                                {pg.wallet}
+                                            </td>
+                                            <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
                                                 {moment(`${pg.createdAt}`).format('MMMM Do YYYY')}
                                             </td>
                                             <td className="border-t-0 px-4 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
@@ -105,7 +108,7 @@ const AllWithdrawals = () => {
                                                 <button type="button" className='bg-white border border-sky-400 rounded hover:bg-sky-400 text-gray-900 py-1 px-2' onClick={() => onEdit(pg)}>Edit</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse()}
                                 </>
                             ) : (
                                 <tr>

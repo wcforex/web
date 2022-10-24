@@ -17,7 +17,7 @@ const Banner = () => {
                 </div>
 
                 <div className="flex items-center justify-center col-span-1 md:col-span-2 lg:col-span-1">
-                    <svg role="img" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500 icon icon-tabler icon-tabler-currency-dogecoin " width="60" height="60" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <svg role="img" xmlns="http://www.w3.org/2000/svg" className="text-yellow-500 icon icon-tabler icon-tabler-currency-dogecoin " width="60" height="60" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
                         <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                         <path d="M6 12h6" /> <path d="M9 6v12" /> <path d="M6 18h6a6 6 0 1 0 0 -12h-6" />
                     </svg>

@@ -66,9 +66,9 @@ export default function User() {
         </div>
       </div>
       {/* Page title ends */}
-      {/* Remove class [ h-64 ] when adding a card block */}
+      {/* Remove className [ h-64 ] when adding a card block */}
       <div className="container mx-auto px-2 lg:px-6 mt-10">
-        {/* Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
+        {/* Remove className [ border-dashed border-2 border-gray-300 ] to remove dotted border */}
         <div className="w-full h-full rounded border-dashed border-2 border-gray-300 pb-2 lg:p-4"><Outlet /></div>
       </div>
     </div>

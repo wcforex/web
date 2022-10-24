@@ -91,7 +91,7 @@ const History = () => {
                                             {moment(`${withdrawal.createdAt}`).format('MMMM Do YYYY')}
                                         </td>
                                     </tr>
-                                ))}
+                                )).reverse()}
                             </>
 
                         ) : (

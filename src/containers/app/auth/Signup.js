@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Message from '../../../components/Message'
-import instance from '../../services/provider';
+// import instance from '../../services/provider';
+import axios from 'axios';
 
 
 const Signup = () => {
@@ -14,7 +15,6 @@ const Signup = () => {
     phoneNumber: "",
     password: "",
     referralCode: "",
-    myCode: "",
   })
 
   const [error, setError] = useState()
@@ -26,22 +26,11 @@ const Signup = () => {
     setUserData({ ...userData, [e.target.name]: e.target.value });
   };
 
-  useEffect(() => {
-    let code = '';
-    let codeLenght = parseInt(8);
-    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghjkmnopqrstuvwxyz0123456789#';
-    for (var i = 0; i < codeLenght; i++) {
-      code += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    setUserData({ myCode: code });
-    // eslint-disable-next-line
-  }, [])
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true)
     try {
-      const { data } = await instance.post('/auth/register', userData)
+      const { data } = await axios.post('https://wcforex.cyclic.app/api/v1/auth/register', userData)
       if (data) {
         setLoading(false)
         navigate('/signin')

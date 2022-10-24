@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import instance from '../../../services/provider';
 import { useNavigate, Link } from 'react-router-dom';
-import moment from 'moment'
+// import moment from 'moment'
 
 export default function PaymentMethod() {
     const [loading, setLoading] = useState('none')
@@ -103,7 +103,7 @@ export default function PaymentMethod() {
                                                 <button type="button" className='bg-white border border-sky-400 rounded hover:bg-sky-400 text-gray-900 py-1 px-2' onClick={() => onEdit(pg)}>Edit</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse()}
                                 </>
                             ) : (
                                 <tr>

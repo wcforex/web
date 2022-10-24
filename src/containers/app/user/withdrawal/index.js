@@ -44,6 +44,7 @@ const Withdrawal = () => {
     }, []);
 
 
+    const [wallet, setWallet] = useState(null)
     const [amount, setAmount] = useState(0)
     const [address, setAddress] = useState(null)
     const [selected, setSelected] = useState(paymentMethods ? paymentMethods[0] : null)
@@ -62,40 +63,51 @@ const Withdrawal = () => {
             setLoader(false)
             setAlert({ visible: 'select', message: '🚫Please select a payment method!' })
         } else {
-            if (amount === null || amount === 0 || amount === '0' || amount === undefined || amount === '') {
+            if (wallet === null || wallet === '' || wallet === undefined) {
                 setLoader(false)
-                setAlert({ visible: 'empty', message: '🚫Please enter amount to withdraw!' })
+                setAlert({ visible: 'empty wallet', message: '🚫Please select wallet!' })
             } else {
-                if (amount > userdata.wallet) {
+                if ((wallet === "wallet" && userdata.wallet === 0) || (wallet === "refwallet" && userdata.refwallet === 0)) {
                     setLoader(false)
-                    setAlert({ visible: 'wallet', message: `Amount entered is above your wallet total!` })
+                    setAlert({ visible: 'not enough', message: '🚫Wallet balance not enough!' })
                 } else {
-                    if (amount < 20) {
+                    if (amount === null || amount === 0 || amount === '0' || amount === undefined || amount === '') {
                         setLoader(false)
-                        setAlert({ visible: 'minimum', message: `The minimum withdrawal is USD20!` })
+                        setAlert({ visible: 'empty', message: '🚫Please enter amount to withdraw!' })
                     } else {
-                        if (address === null || address === '') {
+                        if ((wallet === "wallet" && amount > userdata.wallet) || (wallet === "refwallet" && amount < userdata.refwallet)) {
                             setLoader(false)
-                            setAlert({ visible: 'address', message: `Address mast not be empty!` })
+                            setAlert({ visible: 'wallet', message: `Amount entered is above your wallet total!` })
                         } else {
-                            const payload = {
-                                userId: user._id,
-                                userName: user.firstName + ' ' + user.lastName,
-                                amount: amount,
-                                paymentMethod: selected.name,
-                                account: address
-                            }
-                            try {
-                                const { data } = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
-                                // console.log(data)
+                            if (amount < 20) {
                                 setLoader(false)
-                                if (data) {
+                                setAlert({ visible: 'minimum', message: `The minimum withdrawal is USD20!` })
+                            } else {
+                                if (address === null || address === '') {
                                     setLoader(false)
-                                    navigate('/account')
+                                    setAlert({ visible: 'address', message: `Address mast not be empty!` })
+                                } else {
+                                    const payload = {
+                                        userId: user._id,
+                                        userName: user.firstName + ' ' + user.lastName,
+                                        amount: amount,
+                                        paymentMethod: selected.name,
+                                        account: address,
+                                        wallet: wallet
+                                    }
+                                    try {
+                                        const { data } = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
+                                        // console.log(data)
+                                        setLoader(false)
+                                        if (data) {
+                                            setLoader(false)
+                                            navigate('/account')
+                                        }
+                                    } catch (error) {
+                                        setLoader(false)
+                                        console.log(error)
+                                    }
                                 }
-                            } catch (error) {
-                                setLoader(false)
-                                console.log(error)
                             }
                         }
                     }
@@ -113,6 +125,30 @@ const Withdrawal = () => {
                 </div>
                 <form className="border-t border-gray-200" onSubmit={onConfirm}>
                     <dl>
+                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                            <dt className="text-sm font-medium text-gray-500">Wallet</dt>
+                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                <div className="w-full space-y-0.5">
+                                    <select
+                                        id="basic"
+                                        name='wallet'
+                                        value={wallet}
+                                        onChange={(e) => setWallet(e.target.value)}
+                                        className="block w-full rounded-md py-2 px-2 border border-gray-200 text-sm outline-none transition focus:border focus:border-sky-600 focus:ring-sky-600 disabled:cursor-not-allowed disabled:bg-gray-200 disabled:opacity-75"
+                                    >
+                                        <option value="">Select wallet</option>
+                                        {userdata && <>
+                                            <option value="wallet">Wallet USD {userdata.wallet}</option>
+                                            <option value="refwallet">Referral wallet USD {userdata.refwallet}</option>
+                                        </>}
+                                        {!userdata && <option value="">Loading wallet</option>}
+                                    </select>
+                                    {alert.visible === "empty wallet" && <span className='text-sm text-red-600'>{alert.message}</span>}
+                                    {alert.visible === "not enough" && <span className='text-sm text-red-600'>{alert.message}</span>}
+                                    {alert.visible === "wallet" && <span className='text-sm text-red-600'>{alert.message}</span>}
+                                </div>
+                            </dd>
+                        </div>
                         <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Amount</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">

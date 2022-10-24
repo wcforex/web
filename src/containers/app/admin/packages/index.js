@@ -120,7 +120,7 @@ const AllPackages = () => {
                                                 <button type="button" className='bg-white border border-sky-400 rounded hover:bg-sky-400 text-gray-900 py-1 px-2' onClick={() => onEdit(pg)}>Edit</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse()}
                                 </>
                             ) : (
                                 <tr>

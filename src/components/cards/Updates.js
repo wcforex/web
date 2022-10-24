@@ -77,8 +77,8 @@ const Updates = () => {
                             </svg>
                         </div>
                         <div className="flex flex-col justify-center align-middle">
-                            <p className="text-2xl font-semibold leading-0">Withdrawal</p>
-                            <p className="capitalize">USD {userData ? userData.withdrawal : (
+                            <p className="text-2xl font-semibold leading-0">Bonus</p>
+                            <p className="capitalize">USD {userData ? userData.refwallet : (
                                 <>{loading ? 'loading' : 0}</>
                             )}</p>
                         </div>

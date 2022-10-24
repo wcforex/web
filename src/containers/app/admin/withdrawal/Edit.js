@@ -51,7 +51,35 @@ export default function EditWithdrawal() {
         <div className="w-full max-w-sm px-4 py-3 bg-white rounded-md shadow-md dark:bg-gray-800">
           <div className="flex items-center justify-between">
             <span className="text-sm font-light text-gray-800 dark:text-gray-400">{user ? user.firstName + ' ' + user.lastName : 'loading...'}</span>
-            <span className="px-3 py-1 text-xs text-blue-800 bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">Wallet {user ? `${user.wallet}.00` : 'loading...'}</span>
+            <span className="px-3 py-1 text-xs text-blue-800 bg-blue-200 rounded-full dark:bg-blue-300 dark:text-blue-900">
+              {withdrawal.pg.status === "pending" ? (
+                <>
+                  {withdrawal.pg.wallet === "wallet" ? (
+                    <>
+                      Wallet {user ? user.wallet + withdrawal.pg.amount : 'loading...'}
+                    </>
+                  ) : (
+                    <>
+                      Wallet {user ? user.refwallet + withdrawal.pg.amount : 'loading...'}
+                    </>
+                  )
+                  }
+                </>
+              ) : (
+                <>
+                  {withdrawal.pg.wallet === "wallet" ? (
+                    <>
+                      Wallet {user ? user.wallet : 'loading...'}
+                    </>
+                  ) : (
+                    <>
+                      Wallet {user ? user.refwallet : 'loading...'}
+                    </>
+                  )
+                  }
+                </>
+              )}
+            </span>
           </div>
 
           <div>

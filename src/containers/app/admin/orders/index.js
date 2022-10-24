@@ -114,7 +114,7 @@ const AllOrders = () => {
                                                 <button type="button" className='bg-white border text-[10px] font-semibold border-sky-400 hover:bg-sky-500 hover:text-white rounded-md py-1 px-2  text-gray-900' onClick={() => onEdit(order)}>Update</button>
                                             </td>
                                         </tr>
-                                    ))}
+                                    )).reverse() }
                                 </>
                             ) : (
                                 <tr>

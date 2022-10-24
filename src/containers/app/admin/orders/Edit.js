@@ -51,7 +51,7 @@ export default function EditOrder() {
             if (data) {
                 setLoading(false)
                 alert("Order was successfully updated.")
-                // navigate(-1)
+                navigate(-1)
             }
         } catch (error) {
             setLoading(false)
