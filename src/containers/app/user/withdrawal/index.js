@@ -28,12 +28,11 @@ const Withdrawal = () => {
     const getUser = async () => {
         try {
             const { data } = await instance.get(`/user/${user._id}`)
-            // console.log(data)
             if (data) {
                 setUserdata(data.user)
             }
         } catch (error) {
-            console.log(error)
+            throw new Error(error)
         }
     }
 
@@ -79,9 +78,9 @@ const Withdrawal = () => {
                             setLoader(false)
                             setAlert({ visible: 'wallet', message: `Amount entered is above your wallet total!` })
                         } else {
-                            if (amount < 20) {
+                            if (amount < 10) {
                                 setLoader(false)
-                                setAlert({ visible: 'minimum', message: `The minimum withdrawal is USD20!` })
+                                setAlert({ visible: 'minimum', message: `The minimum withdrawal is USD10!` })
                             } else {
                                 if (address === null || address === '') {
                                     setLoader(false)
@@ -97,7 +96,6 @@ const Withdrawal = () => {
                                     }
                                     try {
                                         const { data } = await instance.post('/withdrawal/create', payload).then((response) => Promise.resolve(response))
-                                        // console.log(data)
                                         setLoader(false)
                                         if (data) {
                                             setLoader(false)

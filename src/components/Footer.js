@@ -35,12 +35,12 @@ export const Footer = () => {
           <div className="flex">
             <p className="mr-1 text-gray-800">WhatsApp:</p>
             <a
-              href="tel:+233552922712"
+              href="tel:+233551286706"
               aria-label="Our phone"
               title="Our phone"
               className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
             >
-              233552922712
+              +233551286706
             </a>
           </div>
           <div className="flex">
@@ -54,19 +54,6 @@ export const Footer = () => {
               worldclassforexinstitute@gmail.com
             </a>
           </div>
-          {/* <div className="flex">
-            <p className="mr-1 text-gray-800">Address:</p>
-            <a
-              href="https://www.google.com/maps"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Our address"
-              title="Our address"
-              className="transition-colors duration-300 text-deep-purple-accent-400 hover:text-deep-purple-800"
-            >
-              312 Lovely Street, NY
-            </a>
-          </div> */}
         </div>
         <div>
           <span className="text-base font-bold tracking-wide text-gray-900">
